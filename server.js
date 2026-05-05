@@ -109,18 +109,32 @@ db.serialize(() => {
     FOREIGN KEY(barang_id) REFERENCES barang(id)
   )`);
 
-  // Seed default users
+  // Seed default users with callback to ensure they're created
   const adminPassword = hashPassword('admin123');
   const userPassword = hashPassword('user123');
   
   db.run(
     "INSERT OR IGNORE INTO users (username, password, role, created_at) VALUES (?, ?, ?, ?)",
-    ['admin', adminPassword, 'admin', new Date().toISOString()]
+    ['admin', adminPassword, 'admin', new Date().toISOString()],
+    function(err) {
+      if (err) {
+        console.error('Error creating admin user:', err.message);
+      } else {
+        console.log('✓ Admin user ready (admin/admin123)');
+      }
+    }
   );
   
   db.run(
     "INSERT OR IGNORE INTO users (username, password, role, created_at) VALUES (?, ?, ?, ?)",
-    ['user', userPassword, 'user', new Date().toISOString()]
+    ['user', userPassword, 'user', new Date().toISOString()],
+    function(err) {
+      if (err) {
+        console.error('Error creating user:', err.message);
+      } else {
+        console.log('✓ Regular user ready (user/user123)');
+      }
+    }
   );
 
   // Seed data untuk barang
@@ -212,6 +226,20 @@ app.get("/health", (req, res) => {
     status: "ok", 
     timestamp: new Date().toISOString(),
     uptime: process.uptime()
+  });
+});
+
+// Debug endpoint to check if users exist (remove in production)
+app.get("/debug/users", (req, res) => {
+  db.all("SELECT id, username, role, created_at FROM users", [], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    res.json({ 
+      count: rows.length, 
+      users: rows,
+      note: "Passwords are hashed and not shown"
+    });
   });
 });
 
