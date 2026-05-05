@@ -206,6 +206,15 @@ app.get("/me", authenticate, (req, res) => {
   });
 });
 
+// Health check endpoint (no auth required)
+app.get("/health", (req, res) => {
+  res.status(200).json({ 
+    status: "ok", 
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime()
+  });
+});
+
 
 // ============ BARANG ENDPOINTS ============
 app.get("/barang", authenticate, (req, res) => {
