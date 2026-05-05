@@ -1,16 +1,18 @@
-# 🏫 Lab Management System v2.2
+# Lab Management System v2.2
 
-Sistem manajemen laboratorium untuk monitoring kunjungan dan peminjaman barang dengan fitur autentikasi user dan super admin. Dilengkapi dengan role-based access control dan dashboard yang disesuaikan untuk setiap role.
+Sistem manajemen laboratorium komprehensif berbasis web untuk monitoring aktivitas kunjungan guru dan pengelolaan peminjaman peralatan laboratorium. Dilengkapi dengan sistem autentikasi multi-level (User & Super Admin), role-based access control (RBAC), dan dashboard interaktif yang disesuaikan dengan kebutuhan setiap role pengguna.
 
-## ✨ Fitur Utama
+**Cocok untuk:** Sekolah, Universitas, Lembaga Pendidikan, dan Institusi dengan fasilitas laboratorium yang memerlukan sistem pencatatan dan monitoring yang terstruktur.
 
-### 🔐 Autentikasi & Otorisasi
-- **Login System** dengan role-based access (User & Super Admin)
-- **Token-based Authentication** untuk keamanan
-- **Session Management** dengan localStorage
-- **Password Hashing** dengan SHA-256
+## Fitur Utama
 
-### 📊 Dashboard Interaktif
+### Autentikasi & Otorisasi
+- Login System dengan role-based access (User & Super Admin)
+- Token-based Authentication untuk keamanan
+- Session Management dengan localStorage
+- Password Hashing dengan SHA-256
+
+### Dashboard Interaktif
 
 #### Dashboard Admin:
 - Total kunjungan dan peminjaman
@@ -20,11 +22,11 @@ Sistem manajemen laboratorium untuk monitoring kunjungan dan peminjaman barang d
 - Chart top 5 barang paling sering dipinjam
 
 #### Dashboard User:
-- 📢 Pengumuman dan informasi terkini
-- ℹ️ Informasi penting tentang penggunaan lab
-- 💡 Tips penggunaan sistem
+- Pengumuman dan informasi terkini
+- Informasi penting tentang penggunaan lab
+- Tips penggunaan sistem
 
-### 👥 Manajemen Kunjungan
+### Manajemen Kunjungan
 - Tambah data kunjungan dengan 5 field:
   - Nama Guru
   - Kelas yang Diajar
@@ -36,7 +38,7 @@ Sistem manajemen laboratorium untuk monitoring kunjungan dan peminjaman barang d
 - Hapus data kunjungan (Admin only)
 - Export data ke CSV
 
-### 📦 Manajemen Peminjaman
+### Manajemen Peminjaman
 - Tambah peminjaman dengan validasi stok
 - Filter berdasarkan status (Dipinjam/Kembali)
 - Search peminjam atau barang
@@ -46,30 +48,29 @@ Sistem manajemen laboratorium untuk monitoring kunjungan dan peminjaman barang d
 - Auto-update stok barang
 - Export data ke CSV
 
-### 🏷️ Manajemen Barang (Admin Only)
+### Manajemen Barang (Admin Only)
 - CRUD lengkap untuk data barang
 - Edit inline dengan form yang sama
-- Search barang by nama atau kode
+- Search barang berdasarkan nama atau kode
 - Validasi stok dan kode unik
-- Highlight stok rendah (< 5)
+- Highlight stok rendah (kurang dari 5)
 - Export data ke CSV
 
-### 📄 Laporan (Admin Only)
+### Laporan (Admin Only)
 - Export semua data ke format CSV
 - Print laporan lengkap dengan statistik
 - Preview laporan sebelum print
 
-### 🎨 UI/UX Modern
+### UI/UX Modern
 - Responsive design (Mobile, Tablet, Desktop)
 - Gradient color scheme yang menarik (Purple-Blue)
 - Smooth animations dan transitions
 - Loading indicators
 - Toast notifications
 - Touch-friendly buttons (44x44px minimum)
-- Toast notifications
 - Icon-based navigation
 
-## 🚀 Instalasi
+## Instalasi
 
 ### Prerequisites
 - Node.js (v14 atau lebih baru)
@@ -97,7 +98,7 @@ npm start
 http://localhost:3000/login.html
 ```
 
-## 👤 Default Accounts
+## Default Accounts
 
 ### User Account
 - **Username:** `user`
@@ -123,7 +124,7 @@ http://localhost:3000/login.html
   - ✅ Laporan (Export & Print)
   - ✅ Hapus semua data
 
-## 🔐 Role-Based Access Control
+## Role-Based Access Control
 
 | Fitur | User | Admin |
 |-------|------|-------|
@@ -138,7 +139,7 @@ http://localhost:3000/login.html
 | **Barang - Akses** | ❌ | ✅ |
 | **Laporan - Akses** | ❌ | ✅ |
 
-## 📁 Struktur Project
+## Struktur Project
 
 ```
 ter-main/
@@ -178,7 +179,7 @@ ter-main/
 
 **Dokumentasi lengkap struktur:** Lihat `docs/FOLDER_STRUCTURE.md`
 
-## 🗄️ Database Schema
+## Database Schema
 
 ### Table: users
 - `id` - Primary key
@@ -216,7 +217,7 @@ ter-main/
 - `waktu_kembali` - Waktu pengembalian
 - `created_at` - Timestamp
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### Authentication
 - `POST /login` - Login user
@@ -243,7 +244,7 @@ ter-main/
 ### Dashboard
 - `GET /stats` - Get dashboard statistics
 
-## 🛡️ Security Features
+## Security Features
 
 - ✅ Password hashing dengan SHA-256
 - ✅ Token-based authentication
@@ -253,7 +254,7 @@ ter-main/
 - ✅ CORS enabled untuk API security
 - ✅ Session management
 
-## 🎯 Fitur Validasi
+## Fitur Validasi
 
 - ✅ Validasi stok sebelum peminjaman
 - ✅ Validasi kode barang unik
@@ -262,14 +263,14 @@ ter-main/
 - ✅ Validasi barang tidak bisa dihapus jika sedang dipinjam
 - ✅ Auto-update stok saat peminjaman dan pengembalian
 
-## 📱 Responsive Design
+## Responsive Design
 
 - ✅ Desktop (1200px+)
 - ✅ Tablet (768px - 1199px)
 - ✅ Mobile (< 768px)
 - ✅ Print-friendly layout
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Port 3000 sudah digunakan
 ```bash
@@ -289,7 +290,7 @@ npm start
 - Check console browser untuk error
 - Clear localStorage: `localStorage.clear()`
 
-## 📝 Changelog
+## Changelog
 
 ### Version 2.0.0 (Current)
 - ✅ Sistem login dengan autentikasi
@@ -309,27 +310,24 @@ npm start
 - Simple dashboard
 - No authentication
 
-## 👨‍💻 Developer
+## Developer
 
-Dikembangkan dengan ❤️ menggunakan:
+Dikembangkan menggunakan:
 - **Backend:** Node.js + Express
 - **Database:** SQLite3
 - **Frontend:** Vanilla JavaScript
 - **Styling:** Custom CSS dengan Gradient
 
-## 📄 License
+## License
 
 MIT License - Free to use and modify
 
-## 🤝 Contributing
+## Contributing
 
 Contributions, issues, and feature requests are welcome!
 
-## 📞 Support
+## Support
 
 Jika ada pertanyaan atau masalah, silakan buat issue di repository ini.
 
----
 
-**Happy Coding! 🚀**
-# labmanagement
