@@ -1,5 +1,5 @@
 // ============ GLOBAL VARIABLES ============
-const API_URL = 'http://localhost:3000';
+// API_URL is defined in config.js
 let currentUser = null;
 let editingBarangId = null;
 let editingKunjunganId = null;
