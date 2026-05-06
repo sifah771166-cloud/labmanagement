@@ -12,7 +12,7 @@
 If you discover a security vulnerability in Lab Management System, please follow these steps:
 
 1. **Do NOT** open a public issue
-2. Email the details to: [your-email@example.com]
+2. Email the details to: [sifah771166@gmail.com]
 3. Include:
    - Description of the vulnerability
    - Steps to reproduce
@@ -77,4 +77,4 @@ We will respond within 48 hours and work with you to resolve the issue.
 
 ## Contact
 
-For security concerns, contact: [your-email@example.com]
+For security concerns, contact: [sifah771166@gmail.com]
