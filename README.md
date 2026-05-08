@@ -121,10 +121,17 @@ labmagement/
 │   ├── dashboard/
 │   │   └── index.html
 │   └── index.html
-├── server/           # Backend (future refactor)
-│   ├── routes/
-│   ├── middleware/
-│   └── database/
+├── server/           # Backend code (modular structure)
+│   ├── database/    # Database connection & setup
+│   │   └── db.js
+│   ├── middleware/  # Authentication middleware
+│   │   └── auth.js
+│   └── routes/      # API route handlers
+│       ├── auth.js
+│       ├── barang.js
+│       ├── kunjungan.js
+│       ├── peminjaman.js
+│       └── stats.js
 ├── .env.example
 ├── .gitignore
 ├── package.json
@@ -150,3 +157,36 @@ labmagement/
 ### Login tidak berhasil
 - Gunakan default credentials
 - Hapus `localStorage` / token di browser
+
+## Catatan
+
+- Folder `docs/` sudah dihapus dan dokumentasi penting sudah dirangkum di `README.md`
+- `CHANGELOG.md`, `CONTRIBUTING.md`, dan `SECURITY.md` tetap ada sebagai dokumen penting proyek
+- **Backend telah direfactor menjadi struktur modular** untuk kemudahan maintenance dan development
+
+## Struktur Backend Modular
+
+Backend telah diorganisir menjadi struktur modular:
+
+### `/server/database/db.js`
+- Koneksi database SQLite
+- Setup tabel dan seeding data
+- Helper functions untuk database operations
+
+### `/server/middleware/auth.js`
+- `authenticate()` - Middleware untuk verifikasi token
+- `requireAdmin()` - Middleware untuk akses admin only
+
+### `/server/routes/`
+- `auth.js` - Login, logout, user info
+- `barang.js` - CRUD operations untuk barang
+- `kunjungan.js` - CRUD operations untuk kunjungan
+- `peminjaman.js` - CRUD operations untuk peminjaman
+- `stats.js` - Dashboard statistics
+
+### Keuntungan Refactoring:
+- ✅ Kode lebih terorganisir dan mudah dipahami
+- ✅ Mudah menambah fitur baru
+- ✅ Testing lebih mudah dilakukan
+- ✅ Developer baru mudah onboard
+- ✅ Maintenance lebih efisien
