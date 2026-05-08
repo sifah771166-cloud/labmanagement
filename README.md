@@ -1,333 +1,150 @@
 # Lab Management System v2.2
 
-Sistem manajemen laboratorium komprehensif berbasis web untuk monitoring aktivitas kunjungan guru dan pengelolaan peminjaman peralatan laboratorium. Dilengkapi dengan sistem autentikasi multi-level (User & Super Admin), role-based access control (RBAC), dan dashboard interaktif yang disesuaikan dengan kebutuhan setiap role pengguna.
+Sistem manajemen laboratorium berbasis web untuk monitoring kunjungan guru, peminjaman peralatan, dan manajemen stok barang.
 
-**Cocok untuk:** Sekolah, Universitas, Lembaga Pendidikan, dan Institusi dengan fasilitas laboratorium yang memerlukan sistem pencatatan dan monitoring yang terstruktur.
+## Ringkasan
+
+- Multi-level access: `user` dan `admin`
+- Dashboard yang berbeda untuk User dan Admin
+- Manajemen kunjungan, peminjaman, dan barang
+- Ekspor data ke CSV dan fitur print laporan
+- Sistem autentikasi token dengan role-based access control
+- UI responsif untuk desktop dan mobile
+
 
 ## Fitur Utama
 
-### Autentikasi & Otorisasi
-- Login System dengan role-based access (User & Super Admin)
-- Token-based Authentication untuk keamanan
-- Session Management dengan localStorage
-- Password Hashing dengan SHA-256
-
-### Dashboard Interaktif
-
-#### Dashboard Admin:
-- Total kunjungan dan peminjaman
-- Peminjaman aktif real-time
-- Monitoring stok barang rendah
-- Kunjungan hari ini
-- Chart top 5 barang paling sering dipinjam
-
-#### Dashboard User:
-- Pengumuman dan informasi terkini
-- Informasi penting tentang penggunaan lab
-- Tips penggunaan sistem
+### Autentikasi & Akses
+- Login dengan username/password
+- Token-based authorization untuk endpoint API
+- Role-based access control: User vs Admin
 
 ### Manajemen Kunjungan
-- Tambah data kunjungan dengan 5 field:
-  - Nama Guru
-  - Kelas yang Diajar
-  - Jam Mulai
-  - Jam Selesai
-  - Tanggal
-- Search & filter data kunjungan
-- Edit data kunjungan (User & Admin)
-- Hapus data kunjungan (Admin only)
+- Tambah/edit kunjungan
+- Hapus kunjungan (Admin saja)
+- Filter dan pencarian data
 - Export data ke CSV
 
 ### Manajemen Peminjaman
 - Tambah peminjaman dengan validasi stok
-- Filter berdasarkan status (Dipinjam/Kembali)
-- Search peminjam atau barang
-- Tandai barang sudah dikembalikan (User & Admin)
-- Edit peminjaman (Admin only)
-- Hapus peminjaman (Admin only)
-- Auto-update stok barang
-- Export data ke CSV
+- Tandai barang kembali
+- Edit/hapus peminjaman (Admin saja)
+- Lihat status peminjaman aktif
 
-### Manajemen Barang (Admin Only)
-- CRUD lengkap untuk data barang
-- Edit inline dengan form yang sama
-- Search barang berdasarkan nama atau kode
+### Manajemen Barang
+- CRUD barang (Admin only)
 - Validasi stok dan kode unik
-- Highlight stok rendah (kurang dari 5)
-- Export data ke CSV
+- Highlight stok rendah
+- Export ke CSV
 
-### Laporan (Admin Only)
-- Export semua data ke format CSV
-- Print laporan lengkap dengan statistik
-- Preview laporan sebelum print
-
-### UI/UX Modern
-- Responsive design (Mobile, Tablet, Desktop)
-- Gradient color scheme yang menarik (Purple-Blue)
-- Smooth animations dan transitions
-- Loading indicators
-- Toast notifications
-- Touch-friendly buttons (44x44px minimum)
-- Icon-based navigation
+### Laporan & Statistik
+- Export laporan CSV
+- Print laporan
+- Statistik kunjungan dan peminjaman
 
 ## Instalasi
 
-### Prerequisites
-- Node.js (v14 atau lebih baru)
+### Persyaratan
+- Node.js v14+ 
 - npm atau yarn
 
-### Langkah Instalasi
-
-1. **Clone atau download project**
+### Langkah
+1. Masuk ke folder proyek
 ```bash
-cd ter-main
+cd labmagement
 ```
-
-2. **Install dependencies**
+2. Install dependencies
 ```bash
 npm install
 ```
-
-3. **Jalankan server**
+3. Jalankan server
 ```bash
 npm start
 ```
-
-4. **Buka browser**
+4. Buka browser
 ```
 http://localhost:3000/login.html
 ```
 
-## Default Accounts
+## Akun Default
 
-### User Account
-- **Username:** `user`
-- **Password:** `user123`
-- **Role:** User
-- **Akses:** 
-  - ✅ Dashboard (Informasi & Pengumuman)
-  - ✅ Kunjungan (Tambah, Edit, Lihat)
-  - ✅ Peminjaman (Tambah, Kembali, Lihat)
-  - ❌ Barang
-  - ❌ Laporan
-  - ❌ Hapus data
+### Admin
+- `admin`
+- `admin123`
+- Akses lengkap: kunjungan, peminjaman, barang, laporan
 
-### Super Admin Account
-- **Username:** `admin`
-- **Password:** `admin123`
-- **Role:** Admin
-- **Akses:** 
-  - ✅ Dashboard (Statistik Lengkap)
-  - ✅ Kunjungan (Full CRUD)
-  - ✅ Peminjaman (Full CRUD)
-  - ✅ Barang (Full CRUD)
-  - ✅ Laporan (Export & Print)
-  - ✅ Hapus semua data
+### User
+- `user`
+- `user123`
+- Akses terbatas: lihat dashboard, tambah/edit kunjungan, tambah/kembali peminjaman
 
-## Role-Based Access Control
+## API Singkat
 
-| Fitur | User | Admin |
-|-------|------|-------|
-| **Dashboard** | Informasi & Pengumuman | Statistik Lengkap |
-| **Kunjungan - Tambah** | ✅ | ✅ |
-| **Kunjungan - Edit** | ✅ | ✅ |
-| **Kunjungan - Hapus** | ❌ | ✅ |
-| **Peminjaman - Tambah** | ✅ | ✅ |
-| **Peminjaman - Edit** | ❌ | ✅ |
-| **Peminjaman - Kembali** | ✅ | ✅ |
-| **Peminjaman - Hapus** | ❌ | ✅ |
-| **Barang - Akses** | ❌ | ✅ |
-| **Laporan - Akses** | ❌ | ✅ |
+### Autentikasi
+- `POST /login` - Login dan dapatkan token
+- `POST /logout` - Logout
+- `GET /me` - Info user saat ini
 
-## Struktur Project
-
-```
-ter-main/
-├── config/                    # Konfigurasi aplikasi
-│   └── config.js             # File konfigurasi utama
-├── data/                      # Database dan data persisten
-│   └── lab.db                # SQLite database (auto-generated)
-├── docs/                      # Dokumentasi proyek
-│   ├── API_DOCUMENTATION.md
-│   ├── FOLDER_STRUCTURE.md
-│   ├── PWA_IMPLEMENTATION_GUIDE.md
-│   ├── REKOMENDASI_PROFESIONAL.md
-│   ├── REORGANIZATION_COMPLETE.md
-│   ├── SUMMARY_PERUBAHAN.md
-│   └── UPDATE_LOG.md
-├── logs/                      # Log aplikasi
-│   └── .gitkeep
-├── public/                    # Frontend files
-│   ├── assets/
-│   │   ├── css/
-│   │   │   └── main.css      # Stylesheet utama
-│   │   ├── js/
-│   │   │   └── app.js        # JavaScript utama
-│   │   └── images/           # Gambar dan icon
-│   ├── index.html            # Halaman utama aplikasi
-│   └── login.html            # Halaman login
-├── server/                    # Backend structure (untuk future refactoring)
-│   ├── routes/               # Route handlers
-│   ├── middleware/           # Custom middleware
-│   └── database/             # Database utilities
-├── .env.example              # Template environment variables
-├── .gitignore                # Git ignore rules
-├── package.json              # NPM dependencies
-├── README.md                 # Dokumentasi utama
-└── server.js                 # Entry point server
-```
-
-**Dokumentasi lengkap struktur:** Lihat `docs/FOLDER_STRUCTURE.md`
-
-## Database Schema
-
-### Table: users
-- `id` - Primary key
-- `username` - Username unik
-- `password` - Password (hashed dengan SHA-256)
-- `role` - Role user (user/admin)
-- `token` - Session token
-- `created_at` - Timestamp
-
-### Table: barang
-- `id` - Primary key
-- `nama` - Nama barang
-- `kode` - Kode barang (unique)
-- `stok` - Jumlah stok
-- `created_at` - Timestamp
-- `updated_at` - Timestamp
-
-### Table: kunjungan
-- `id` - Primary key
-- `nama_guru` - Nama guru yang mengajar
-- `kelas_diajar` - Kelas yang diajar
-- `jam_mulai` - Jam mulai mengajar (HH:MM)
-- `jam_selesai` - Jam selesai mengajar (HH:MM)
-- `tanggal` - Tanggal kunjungan
-- `created_at` - Timestamp
-- `created_at` - Timestamp
-
-### Table: peminjaman
-- `id` - Primary key
-- `nama` - Nama peminjam
-- `barang_id` - Foreign key ke barang
-- `jumlah` - Jumlah dipinjam
-- `status` - Status (dipinjam/kembali)
-- `waktu_pinjam` - Waktu peminjaman
-- `waktu_kembali` - Waktu pengembalian
-- `created_at` - Timestamp
-
-## API Endpoints
-
-### Authentication
-- `POST /login` - Login user
-- `POST /logout` - Logout user
-- `GET /me` - Get current user info
-
-### Barang (Admin only)
-- `GET /barang?search=` - Get all barang
-- `POST /barang` - Create barang
+### Barang (Admin)
+- `GET /barang` - List barang
+- `POST /barang` - Tambah barang
 - `PUT /barang/:id` - Update barang
-- `DELETE /barang/:id` - Delete barang
+- `DELETE /barang/:id` - Hapus barang
 
 ### Kunjungan
-- `GET /kunjungan?search=` - Get all kunjungan
-- `POST /kunjungan` - Create kunjungan
-- `DELETE /kunjungan/:id` - Delete kunjungan
+- `GET /kunjungan` - List kunjungan
+- `POST /kunjungan` - Tambah kunjungan
+- `PUT /kunjungan/:id` - Edit kunjungan
+- `DELETE /kunjungan/:id` - Delete kunjungan (Admin)
 
 ### Peminjaman
-- `GET /peminjaman?search=&status=` - Get all peminjaman
-- `POST /peminjaman` - Create peminjaman
-- `PUT /peminjaman/:id` - Return peminjaman
-- `DELETE /peminjaman/:id` - Delete peminjaman
+- `GET /peminjaman` - List peminjaman
+- `POST /peminjaman` - Tambah peminjaman
+- `PUT /peminjaman/:id` - Update status peminjaman
+- `DELETE /peminjaman/:id` - Delete peminjaman (Admin)
 
-### Dashboard
-- `GET /stats` - Get dashboard statistics
+## Struktur Proyek
 
-## Security Features
-
-- ✅ Password hashing dengan SHA-256
-- ✅ Token-based authentication
-- ✅ Role-based access control
-- ✅ Input validation di frontend dan backend
-- ✅ SQL injection prevention dengan parameterized queries
-- ✅ CORS enabled untuk API security
-- ✅ Session management
-
-## Fitur Validasi
-
-- ✅ Validasi stok sebelum peminjaman
-- ✅ Validasi kode barang unik
-- ✅ Validasi input required fields
-- ✅ Validasi jumlah harus positif
-- ✅ Validasi barang tidak bisa dihapus jika sedang dipinjam
-- ✅ Auto-update stok saat peminjaman dan pengembalian
-
-## Responsive Design
-
-- ✅ Desktop (1200px+)
-- ✅ Tablet (768px - 1199px)
-- ✅ Mobile (< 768px)
-- ✅ Print-friendly layout
-
-## Troubleshooting
-
-### Port 3000 sudah digunakan
-```bash
-# Ubah port di server.js baris terakhir
-app.listen(3001, () => console.log("Server running at http://localhost:3001"));
+```
+labmagement/
+├── config/           # Konfigurasi aplikasi
+│   └── config.js
+├── data/             # Database dan data persisten
+│   └── lab.db
+├── logs/             # Folder log aplikasi
+│   └── .gitkeep
+├── public/           # Frontend
+│   ├── assets/css/
+│   ├── assets/js/
+│   ├── assets/images/
+│   ├── index.html
+│   └── login.html
+├── server/           # Backend (future refactor)
+│   ├── routes/
+│   ├── middleware/
+│   └── database/
+├── .env.example
+├── .gitignore
+├── package.json
+├── README.md
+└── server.js
 ```
 
-### Database error
-```bash
-# Hapus file lab.db dan restart server untuk recreate database
-rm lab.db
-npm start
-```
+## Troubleshooting Singkat
 
-### Login tidak berfungsi
-- Pastikan server sudah running
-- Check console browser untuk error
-- Clear localStorage: `localStorage.clear()`
+### Server tidak jalan
+- Pastikan dependencies terinstall
+- Jalankan `npm install` lalu `npm start`
+- Ganti port jika perlu di `.env`
 
-## Changelog
+### Error module hilang
+- Hapus `node_modules`
+- Jalankan `npm install`
 
-### Version 2.0.0 (Current)
-- ✅ Sistem login dengan autentikasi
-- ✅ Role-based access (User & Admin)
-- ✅ Dashboard dengan statistik lengkap
-- ✅ Manajemen barang (CRUD)
-- ✅ Search & filter di semua tabel
-- ✅ Export data ke CSV
-- ✅ Print laporan
-- ✅ Responsive design
-- ✅ Loading indicators
-- ✅ Toast notifications
-- ✅ Improved UI/UX
+### Database bermasalah
+- Hapus `data/lab.db`
+- Restart server untuk membuat ulang database
 
-### Version 1.0.0
-- Basic kunjungan dan peminjaman
-- Simple dashboard
-- No authentication
-
-## Developer
-
-Dikembangkan menggunakan:
-- **Backend:** Node.js + Express
-- **Database:** SQLite3
-- **Frontend:** Vanilla JavaScript
-- **Styling:** Custom CSS dengan Gradient
-
-## License
-
-MIT License - Free to use and modify
-
-## Contributing
-
-Contributions, issues, and feature requests are welcome!
-
-## Support
-
-Jika ada pertanyaan atau masalah, silakan buat issue di repository ini.
-
-
+### Login tidak berhasil
+- Gunakan default credentials
+- Hapus `localStorage` / token di browser
