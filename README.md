@@ -158,28 +158,20 @@ labmagement/
 - Gunakan default credentials
 - Hapus `localStorage` / token di browser
 
-## Catatan
-
-- Folder `docs/` sudah dihapus dan dokumentasi penting sudah dirangkum di `README.md`
-- `CHANGELOG.md`, `CONTRIBUTING.md`, dan `SECURITY.md` tetap ada sebagai dokumen penting proyek
-- **Backend telah direfactor menjadi struktur modular** untuk kemudahan maintenance dan development
 
 ## Struktur Backend Modular
 
-Backend telah diorganisir menjadi struktur modular:
+Backend sistem ini dibangun dengan arsitektur modular untuk memudahkan pengembangan dan pemeliharaan di masa depan. Kode dibagi menjadi beberapa bagian utama:
 
-### `/server/database/db.js`
-- Koneksi database SQLite
-- Setup tabel dan seeding data
-- Helper functions untuk database operations
+**Database (`/server/database/db.js`)**: Bagian ini bertanggung jawab untuk menghubungkan aplikasi ke database SQLite, membuat tabel-tabel yang diperlukan, dan mengisi data awal seperti akun default admin dan user.
 
-### `/server/middleware/auth.js`
-- `authenticate()` - Middleware untuk verifikasi token
-- `requireAdmin()` - Middleware untuk akses admin only
+**Middleware (`/server/middleware/auth.js`)**: Middleware ini menangani autentikasi dan otorisasi. Fungsi `authenticate()` memverifikasi token yang dikirim user, sementara `requireAdmin()` memastikan hanya admin yang bisa mengakses fitur tertentu.
 
-### `/server/routes/`
-- `auth.js` - Login, logout, user info
-- `barang.js` - CRUD operations untuk barang
-- `kunjungan.js` - CRUD operations untuk kunjungan
-- `peminjaman.js` - CRUD operations untuk peminjaman
-- `stats.js` - Dashboard statistics
+**Routes (`/server/routes/`)**: Folder ini berisi berbagai endpoint API yang dibagi berdasarkan fungsi:
+- `auth.js`: Mengelola login, logout, dan informasi user
+- `barang.js`: Operasi CRUD untuk manajemen barang (hanya admin)
+- `kunjungan.js`: Mengelola data kunjungan guru
+- `peminjaman.js`: Menangani peminjaman dan pengembalian barang
+- `stats.js`: Menyediakan data statistik untuk dashboard
+
+Struktur ini membuat kode lebih mudah dipahami, diuji, dan dikembangkan oleh developer lain.
