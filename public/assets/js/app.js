@@ -14,7 +14,7 @@ function checkAuth() {
   const userStr = localStorage.getItem('user');
   
   if (!token || !userStr) {
-    window.location.href = '/login/';
+    window.location.href = '/login.html';
     return false;
   }
   
@@ -45,7 +45,7 @@ async function handleLogout() {
   
   localStorage.removeItem('token');
   localStorage.removeItem('user');
-  window.location.href = '/login/';
+  window.location.href = '/login.html';
 }
 
 // ============ FETCH HELPER ============
@@ -71,7 +71,7 @@ async function fetchAPI(endpoint, options = {}) {
   if (response.status === 401) {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    window.location.href = '/login/';
+    window.location.href = '/login.html';
     throw new Error('Unauthorized');
   }
   
