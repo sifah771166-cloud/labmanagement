@@ -63,7 +63,7 @@ npm start
 ```
 4. Buka browser
 ```
-http://localhost:3000/login.html
+http://localhost:3000/
 ```
 
 ## Akun Default
@@ -118,8 +118,9 @@ labmagement/
 │   │   └── main.css
 │   ├── assets/js/
 │   ├── assets/images/
-│   ├── dashboard.html
-│   └── login.html
+│   ├── dashboard/
+│   │   └── index.html
+│   └── index.html
 ├── server/           # Backend (future refactor)
 │   ├── routes/
 │   ├── middleware/
